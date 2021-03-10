@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, NavLink, Switch, Route } from 'react-router-dom';
 import styled from "styled-components";
 import Blog from './Componentes/Blog';
+import Carrito from './Componentes/Carrito';
 import Error404 from './Componentes/Error404';
 import Inicio from './Componentes/Inicio';
 import Tienda from './Componentes/Tienda';
@@ -13,6 +14,8 @@ function App() {
     {id:3, producto:'producto2'},
     {id:4, producto:'producto4'},
 ]
+
+const [carrito, setCarrito] = useState([])
   return (
     <>
       <BrowserRouter>
@@ -34,7 +37,7 @@ function App() {
             </Switch>
           </main>
           <aside>
-            <h3>Sidebar</h3>
+            <Carrito carrito = {carrito}/>
           </aside>
 
         </Contenedor>
