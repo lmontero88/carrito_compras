@@ -10,7 +10,7 @@ function Carrito({carrito}) {
                 carrito.map((producto, index) => {
                     return <Producto key= {index}>
                         <NombreProducto>
-                            {producto.descripcion}
+                            {producto.nombre}
                         </NombreProducto>
                         Cantidad: {producto.cantidad}
                     </Producto>

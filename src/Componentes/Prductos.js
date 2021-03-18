@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 
-function Prductos({productos}) {
+function Prductos({productos, agregarProducto}) {
     return (
         <div>
             <h1>Productos</h1>
@@ -12,7 +12,7 @@ function Prductos({productos}) {
                     return (
                     <Producto key={i}>
                         <p>{producto.producto}</p>
-                        <Boton>Agregar al carrito</Boton>
+                        <Boton onClick={()=>{agregarProducto(producto.id, producto.producto)}}>Agregar al carrito</Boton>
                     </Producto>
                     )
                 })}

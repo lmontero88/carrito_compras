@@ -3,11 +3,11 @@ import Prductos from './Prductos'
 
 
 
-function Tienda({productos}) {
+function Tienda({productos, agregarProducto}) {
     return (
         <div>
             <h1>Tienda</h1>
-            <Prductos productos={productos}/>
+            <Prductos productos={productos} agregarProducto={agregarProducto}/>
         </div>
     )
 }

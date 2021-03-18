@@ -8,14 +8,49 @@ import Inicio from './Componentes/Inicio';
 import Tienda from './Componentes/Tienda';
 
 function App() {
-  const productos =[
-    {id:1, producto:'producto1'},
-    {id:2, producto:'producto2'},
-    {id:3, producto:'producto2'},
-    {id:4, producto:'producto4'},
-]
+  const productos = [
+    { id: 1, producto: 'producto1' },
+    { id: 2, producto: 'producto2' },
+    { id: 3, producto: 'producto3' },
+    { id: 4, producto: 'producto4' },
+  ]
 
-const [carrito, setCarrito] = useState([])
+  const [carrito, setCarrito] = useState([])
+
+  const agregarProducto = (idProducto, nombreProducto) => {
+    if (carrito.length === 0) {
+      setCarrito([{
+        id: idProducto,
+        nombre: nombreProducto,
+        cantidad: 1
+
+      }])
+    } else {
+      let nuevoCarrito = [...carrito]
+      let enCarrito = nuevoCarrito.filter((productoEnCarrito) => {
+        return productoEnCarrito.id === idProducto
+      }).length > 0;
+      if (enCarrito) {
+        nuevoCarrito.forEach((producto, index) => {
+          if (producto.id === idProducto) {
+            let cantidad = nuevoCarrito[index].cantidad;
+            nuevoCarrito[index] = {
+              id: idProducto,
+              nombre: nombreProducto,
+              cantidad: cantidad + 1,
+            }
+          }
+        })
+      } else {
+        nuevoCarrito.push({
+          id: idProducto,
+          nombre: nombreProducto,
+          cantidad: 1,
+       })
+      }
+      setCarrito(nuevoCarrito)
+    }
+  }
   return (
     <>
       <BrowserRouter>
@@ -27,17 +62,17 @@ const [carrito, setCarrito] = useState([])
           </Menu>
           <main>
             <Switch>
-            <Route path="/" exact={true} component={Inicio}/>
-            <Route path="/blog" component={Blog}/>
-            <Route path="/tienda">
-              <Tienda productos= {productos}/>
-            </Route>
-            <Route component={Error404}/>
+              <Route path="/" exact={true} component={Inicio} />
+              <Route path="/blog" component={Blog} />
+              <Route path="/tienda">
+                <Tienda productos={productos} agregarProducto={agregarProducto} />
+              </Route>
+              <Route component={Error404} />
 
             </Switch>
           </main>
           <aside>
-            <Carrito carrito = {carrito}/>
+            <Carrito carrito={carrito} />
           </aside>
 
         </Contenedor>
